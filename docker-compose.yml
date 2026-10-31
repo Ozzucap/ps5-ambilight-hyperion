@@ -1,0 +1,25 @@
+# PS5 -> Hyperion bridge, e.g. for Portainer (Stacks > Add stack > Web editor).
+#
+# Before deploying:
+#  1) build the bridge (make bridge) and copy build/ps5-bridge to /volume1/docker/ps5-bridge/
+#     on your NAS (change the volumes line if your shared folder lives elsewhere)
+#  2) set the two IP addresses below
+services:
+  ps5-bridge:
+    image: alpine:3.20
+    container_name: ps5-bridge
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/ps5-bridge:/app
+    environment:
+      PS5_HOST: 192.168.1.50          # console IP
+      HYPERION_HOST: 192.168.1.100    # machine running Hyperion
+      HYPERION_PRIORITY: "140"        # must not collide with other sources (e.g. an Android TV grabber)
+      SNAPSHOT: /app/snapshot.png     # check image, refreshed every 5 s
+      FPS: "30"                       # max frames/s sent to Hyperion
+      HDR: "1"                        # console has HDR on: convert to SDR for the LEDs
+      # HDR_PAPER_WHITE: "203"        # lower = brighter LEDs (try 150 or 120)
+      # HDR_PEAK: "1000"              # HDR level that reaches full white
+    # copied to /tmp to make it executable (an upload to a NAS often drops the exec bit)
+    command: ["sh", "-c", "cp /app/ps5-bridge /tmp/ps5-bridge && chmod +x /tmp/ps5-bridge && exec /tmp/ps5-bridge"]

@@ -1,0 +1,15 @@
+# Copy to the console as /data/ps5-ambilight/config.ini
+# (create the ps5-ambilight folder inside /data, e.g. over FTP)
+# Used by the LED test payload only.
+
+# Address of the machine running Hyperion (required)
+host=192.168.1.100
+
+# Hyperion Flatbuffers server port
+port=19400
+
+# How long the test runs, in seconds
+seconds=30
+
+# Priority on Hyperion: 100-199 (lower = more important)
+priority=150
