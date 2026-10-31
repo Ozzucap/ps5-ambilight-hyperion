@@ -1,5 +1,5 @@
 # PS5 Ambilight for Hyperion.ng
-![PS5 ambilight with Hyperion](ps5-ambilight-simple.png)
+![PS5 ambilight with Hyperion](ps5-ambilight.png)
 
 Ambilight for a jailbroken PS5 **without a capture card**: a small bridge takes the
 console's picture, reduces it to 64×36 pixels and feeds it to
